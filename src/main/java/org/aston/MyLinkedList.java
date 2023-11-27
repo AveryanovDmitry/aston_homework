@@ -18,11 +18,10 @@ public class MyLinkedList<T> implements MyList<T> {
         final Node<T> newNode = new Node<>(null, last, element);
         if (last == null) {
             first = newNode;
-            last = newNode;
         } else {
             last.next = newNode;
-            last = newNode;
         }
+        last = newNode;
         size++;
     }
 
@@ -76,7 +75,7 @@ public class MyLinkedList<T> implements MyList<T> {
 
     @Override
     public void sort(Comparator<T> comparator) {
-        if (size > 1) {
+        if (size == 1) {
             return;
         }
         for (Node<T> a = first; a != null; a = a.next) {

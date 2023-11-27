@@ -4,26 +4,26 @@ import java.util.*;
 
 /**
  * @param <E> stored data type
- * capacity - array capacity
- * elementsArr - array data
- * size - number of elements in the array
+ *            capacity - array capacity
+ *            elementsArr - array data
+ *            size - number of elements in the array
  */
 public class MyArrayList<E> implements MyList<E> {
-    private int capacity = 10;
+    private static final int CAPACITY = 10;
 
-    private E[] elementsArr;
+    private Object[] elementsArr;
 
     private int size;
 
     public MyArrayList() {
-        elementsArr = (E[]) new Object[capacity];
+        elementsArr = new Object[CAPACITY];
     }
 
     public MyArrayList(int newCapacity) {
         if (newCapacity < 0) {
             throw new IllegalArgumentException("The size of MyArrayList cannot be negative");
         }
-        elementsArr = (E[]) new Object[newCapacity];
+        elementsArr = new Object[newCapacity];
     }
 
     @Override
@@ -40,8 +40,8 @@ public class MyArrayList<E> implements MyList<E> {
         if (size + 1 == elementsArr.length) {
             grow();
         }
-        for (int i = size - 1; i >= index; i--) {
-            elementsArr[i + 1] = elementsArr[i];
+        if (size - index >= 0) {
+            System.arraycopy(elementsArr, index, elementsArr, index + 1, size - index);
         }
         elementsArr[index] = element;
         size++;
@@ -50,7 +50,7 @@ public class MyArrayList<E> implements MyList<E> {
     @Override
     public E get(int index) {
         checkIndex(index);
-        return elementsArr[index];
+        return (E) elementsArr[index];
     }
 
     @Override
@@ -80,8 +80,8 @@ public class MyArrayList<E> implements MyList<E> {
         }
         for (int i = 0; i < size; i++) {
             for (int j = i + 1; j < size; j++) {
-                if (comparator.compare(elementsArr[i], elementsArr[j]) > 0) {
-                    E tmp = elementsArr[i];
+                if (comparator.compare((E) elementsArr[i], (E) elementsArr[j]) > 0) {
+                    E tmp = (E) elementsArr[i];
                     elementsArr[i] = elementsArr[j];
                     elementsArr[j] = tmp;
                 }
@@ -101,7 +101,6 @@ public class MyArrayList<E> implements MyList<E> {
     }
 
     private void grow() {
-        capacity = capacity + capacity / 2;
-        elementsArr = Arrays.copyOf(elementsArr, capacity);
+        elementsArr = Arrays.copyOf(elementsArr, size + size / 2);
     }
 }
