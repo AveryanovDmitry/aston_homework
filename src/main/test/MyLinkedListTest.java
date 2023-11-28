@@ -1,4 +1,3 @@
-import org.aston.MyArrayList;
 import org.aston.MyLinkedList;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -68,7 +67,7 @@ class MyLinkedListTest {
         myLinkedList.sort(Integer::compareTo);
 
         for (int i = 1; i < 10; i++) {
-            Assertions.assertTrue(myLinkedList.get(i) > myLinkedList.get(i - 1));
+            Assertions.assertTrue(myLinkedList.get(i) >= myLinkedList.get(i - 1));
         }
     }
 }
