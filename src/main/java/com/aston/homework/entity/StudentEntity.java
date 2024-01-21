@@ -13,7 +13,7 @@ import java.util.Objects;
 @NoArgsConstructor
 public class StudentEntity {
     private Long id;
-    private Long groupID;
+    private Long groupId;
     private String name;
 
     @Override
@@ -21,11 +21,11 @@ public class StudentEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         StudentEntity that = (StudentEntity) o;
-        return Objects.equals(groupID, that.groupID) && Objects.equals(name, that.name);
+        return Objects.equals(groupId, that.groupId) && Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(groupID, name);
+        return Objects.hash(groupId, name);
     }
 }

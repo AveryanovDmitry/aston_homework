@@ -36,7 +36,7 @@ public class StudentRepositoryImpl implements StudentRepository {
             StudentEntity student = new StudentEntity();
             student.setId(resultSet.getLong("id"));
             student.setName(resultSet.getString("name"));
-            student.setGroupID(resultSet.getLong("group_id"));
+            student.setGroupId(resultSet.getLong("group_id"));
             return student;
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -48,7 +48,7 @@ public class StudentRepositoryImpl implements StudentRepository {
              PreparedStatement insertStatement = connection
                      .prepareStatement(INSERT_STUDENT, Statement.RETURN_GENERATED_KEYS)) {
             insertStatement.setString(1, student.getName());
-            insertStatement.setLong(2, student.getGroupID());
+            insertStatement.setLong(2, student.getGroupId());
             insertStatement.executeUpdate();
             ResultSet generatedKeys = insertStatement.getGeneratedKeys();
             generatedKeys.next();
